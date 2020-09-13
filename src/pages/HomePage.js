@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { getUserData } from "../features/user/userSlice";
+import { getTweets } from "../features/tweets/tweetsSlice";
 
 const mapDispatchToProps = {
   getUserData,
+  getTweets,
 };
 
 const mapStateToProps = (state) => {
@@ -14,10 +16,11 @@ const mapStateToProps = (state) => {
 };
 
 function HomePage(props) {
-  const { getUserData } = props;
+  const { getUserData, getTweets } = props;
   const { name } = props.user;
   useEffect(() => {
     getUserData();
+    getTweets();
   }, []);
   return (
     <div>

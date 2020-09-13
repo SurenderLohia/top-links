@@ -56,7 +56,6 @@ const getUserData = () => {
       console.log(response);
       dispatch(setUserData(response.data.user));
       return response;
-      // set profile
     } catch (err) {
       if (err.response) {
         console.log(err.response.data);
