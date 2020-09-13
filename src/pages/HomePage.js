@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
+import Nav from "../components/Nav";
+
 const mapDispatchToProps = {
   getUserData,
   getTweets,
@@ -24,8 +26,15 @@ function HomePage(props) {
   }, []);
   return (
     <div>
-      <h1>Home page 2</h1>
-      <h3>Welcome {name}</h3>
+      <Nav />
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Top Links</h1>
+            <h2 class="subtitle">Welcome {name}!</h2>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
