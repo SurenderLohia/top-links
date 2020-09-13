@@ -1,22 +1,30 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
 
-function HomePage() {
+import { getUserData } from "../features/user/userSlice";
+
+const mapDispatchToProps = {
+  getUserData,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.data,
+  };
+};
+
+function HomePage(props) {
+  const { getUserData } = props;
+  const { name } = props.user;
   useEffect(() => {
-    console.log("component did mount");
-    axios
-      .get("http://localhost:4000/auth/login/success", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log("response");
-        console.log(response.data.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getUserData();
   }, []);
-  return <h1>Home page 2</h1>;
+  return (
+    <div>
+      <h1>Home page 2</h1>
+      <h3>Welcome {name}</h3>
+    </div>
+  );
 }
 
-export default HomePage;
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
