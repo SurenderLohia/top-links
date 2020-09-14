@@ -5,6 +5,7 @@ import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
 import Nav from "../components/Nav";
+import Hero from "../components/Hero";
 import VisibileTweets from "../features/tweets/VisibleTweets";
 
 const mapDispatchToProps = {
@@ -28,14 +29,7 @@ function HomePage(props) {
   return (
     <div>
       <Nav />
-      <section className="hero is-primary mb-6">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">Top Links</h1>
-            <h2 className="subtitle">Welcome {name}!</h2>
-          </div>
-        </div>
-      </section>
+      <Hero name={name} />
       <div className="container">
         <VisibileTweets />
       </div>

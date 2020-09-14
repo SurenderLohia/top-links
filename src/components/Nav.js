@@ -10,8 +10,8 @@ function Nav() {
             Home
           </Link>
 
-          <Link className="navbar-item" to="/about">
-            About
+          <Link className="navbar-item" to="/top-user">
+            Top User
           </Link>
         </div>
 

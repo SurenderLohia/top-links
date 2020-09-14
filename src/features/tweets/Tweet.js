@@ -17,7 +17,7 @@ function Tweet(props) {
             </div>
             <div className="media-content">
               <p className="title is-4">{tweet.user.name}</p>
-              <p className="subtitle is-6">@{tweet.user.name}</p>
+              <p className="subtitle is-6">@{tweet.user.screenName}</p>
             </div>
           </div>
 
