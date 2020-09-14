@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import Tweets from "./Tweets";
+import TweetsHeader from "./TweetsHeader";
 
 const getVisibleTweets = (Tweets, locationFilter, searchQuery) => {
   if (!locationFilter && !searchQuery) {
@@ -45,7 +46,8 @@ const mapStateToProps = (state) => {
 function VisibileTweets(props) {
   const { tweets } = props;
   return (
-    <div className="columns is-multiline">
+    <div>
+      <TweetsHeader />
       <Tweets tweets={tweets} />
     </div>
   );
