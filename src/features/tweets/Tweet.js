@@ -6,31 +6,33 @@ function Tweet(props) {
   const { tweet } = props;
   const formattedTime = moment(tweet.created_at).format("h:mm a - D MMM YYYY");
   return (
-    <div className="card">
-      <div className="card-content">
-        <div className="media">
-          <div className="media-left">
-            <figure className="image is-48x48">
-              <img src={tweet.user.profileImageUrl} alt={tweet.user.name} />
-            </figure>
+    <div className="column is-one-quarter">
+      <div className="card">
+        <div className="card-content">
+          <div className="media">
+            <div className="media-left">
+              <figure className="image is-48x48">
+                <img src={tweet.user.profileImageUrl} alt={tweet.user.name} />
+              </figure>
+            </div>
+            <div className="media-content">
+              <p className="title is-4">{tweet.user.name}</p>
+              <p className="subtitle is-6">@{tweet.user.name}</p>
+            </div>
           </div>
-          <div className="media-content">
-            <p className="title is-4">{tweet.user.name}</p>
-            <p className="subtitle is-6">@{tweet.user.name}</p>
-          </div>
-        </div>
 
-        <div className="content">
-          {tweet.text}
-          {/* Todo: add hashtags */}
-          <br />
-          {tweet.entity_url.map((item, index) => (
-            <p key={index}>
-              <a href={item.url}>{item.url}</a>
-            </p>
-          ))}
-          <p className="is-capitalized">{tweet.user.location}</p>
-          <time>{formattedTime}</time>
+          <div className="content">
+            {tweet.text}
+            {/* Todo: add hashtags */}
+            <br />
+            {tweet.entity_url.map((item, index) => (
+              <p key={index}>
+                <a href={item.url}>{item.url}</a>
+              </p>
+            ))}
+            <p className="is-capitalized">{tweet.user.location}</p>
+            <time>{formattedTime}</time>
+          </div>
         </div>
       </div>
     </div>

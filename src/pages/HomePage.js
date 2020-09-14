@@ -5,7 +5,7 @@ import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
 import Nav from "../components/Nav";
-import Tweet from "../features/tweets/Tweet";
+import Tweets from "../features/tweets/Tweets";
 
 const mapDispatchToProps = {
   getUserData,
@@ -38,11 +38,7 @@ function HomePage(props) {
         </div>
       </section>
       <div className="container">
-        <div className="columns">
-          <div className="column is-one-quarter">
-            <Tweet tweet={tweets[0]} />
-          </div>
-        </div>
+        <Tweets tweets={tweets} />
       </div>
     </div>
   );
