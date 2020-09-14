@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
   const { tweets } = state;
   const { locationFilter, searchQuery } = tweets;
   return {
-    tweets: getVisibleTweets(tweets.items, locationFilter, searchQuery),
+    tweets: getVisibleTweets(tweets.data.items, locationFilter, searchQuery),
   };
 };
 

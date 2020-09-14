@@ -4,7 +4,10 @@ import axios from "axios";
 import api from "../../constants/api";
 
 const initialState = {
-  items: [],
+  data: {
+    items: [],
+    topUser: {},
+  },
   locationFilter: "",
   searchQuery: "",
 };
@@ -13,9 +16,10 @@ const tweetsSlice = createSlice({
   name: "tweets",
   initialState,
   reducers: {
-    setTweetItems(state, action) {
-      const { tweets } = action.payload;
-      state.items = tweets;
+    setTweetsData(state, action) {
+      const { tweets, topUser } = action.payload;
+      state.data.items = tweets;
+      state.data.topUser = topUser;
     },
     setLocationFilter(state, action) {
       const { locationFilter } = action.payload;
@@ -29,7 +33,7 @@ const tweetsSlice = createSlice({
 });
 
 const {
-  setTweetItems,
+  setTweetsData,
   setLocationFilter,
   setSearchQuery,
 } = tweetsSlice.actions;
@@ -42,7 +46,9 @@ const getTweets = () => {
         withCredentials: true,
       });
 
-      dispatch(setTweetItems({ tweets: response.data }));
+      const { tweets, topUser } = response.data;
+
+      dispatch(setTweetsData({ tweets, topUser }));
       return response;
     } catch (err) {
       if (err.response) {

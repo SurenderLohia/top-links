@@ -20,7 +20,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   const { tweets } = state;
   return {
-    locations: getLocations(tweets.items),
+    locations: getLocations(tweets.data.items),
   };
 };
 
