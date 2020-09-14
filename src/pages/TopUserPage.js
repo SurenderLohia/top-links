@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import Nav from "../components/Nav";
-import Hero from "../components/Hero";
+import { getUserData } from "../features/user/userSlice";
+import { getTweets } from "../features/tweets/tweetsSlice";
+
 import UserCard from "../components/UserCard";
+
+const mapDispatchToProps = {
+  getUserData,
+  getTweets,
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -13,18 +19,19 @@ const mapStateToProps = (state) => {
 };
 
 function TopUserPage(props) {
-  const { name } = props.user;
+  const { getUserData, getTweets } = props;
   const { topUser } = props;
+  useEffect(() => {
+    getUserData();
+    getTweets();
+  }, []);
+
   return (
-    <div>
-      <Nav />
-      <Hero name={name} />
-      <div className="container">
-        <h2 className="is-size-3">Top User</h2>
-        <UserCard user={topUser} />
-      </div>
+    <div className="container">
+      <h2 className="is-size-3">Top User</h2>
+      <UserCard user={topUser} />
     </div>
   );
 }
 
-export default connect(mapStateToProps)(TopUserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TopUserPage);

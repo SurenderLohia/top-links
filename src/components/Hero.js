@@ -1,4 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    name: state.user.data.name,
+  };
+};
 
 function Hero(props) {
   const { name } = props;
@@ -14,4 +21,4 @@ function Hero(props) {
   );
 }
 
-export default Hero;
+export default connect(mapStateToProps)(Hero);

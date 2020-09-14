@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
-import Nav from "../components/Nav";
-import Hero from "../components/Hero";
 import VisibileTweets from "../features/tweets/VisibleTweets";
 
 const mapDispatchToProps = {
@@ -27,12 +25,8 @@ function HomePage(props) {
     getTweets();
   }, []);
   return (
-    <div>
-      <Nav />
-      <Hero name={name} />
-      <div className="container">
-        <VisibileTweets />
-      </div>
+    <div className="container">
+      <VisibileTweets />
     </div>
   );
 }

@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import { setLocationFilter, setSearchQuery } from "./tweetsSlice";
 
 const getLocations = function (tweets) {
-  const locations = tweets.map((tweet) => {
-    return tweet.user.location;
-  });
+  const locations =
+    tweets &&
+    tweets.map((tweet) => {
+      return tweet.user.location;
+    });
 
   return [...new Set(locations)];
 };
