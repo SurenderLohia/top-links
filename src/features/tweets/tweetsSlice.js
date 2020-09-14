@@ -17,10 +17,22 @@ const tweetsSlice = createSlice({
       const { tweets } = action.payload;
       state.items = tweets;
     },
+    setLocationFilter(state, action) {
+      const { locationFilter } = action.payload;
+      state.locationFilter = locationFilter;
+    },
+    setSearchQuery(state, action) {
+      const { searchQuery } = action.payload;
+      state.searchQuery = searchQuery;
+    },
   },
 });
 
-const { setTweetItems } = tweetsSlice.actions;
+const {
+  setTweetItems,
+  setLocationFilter,
+  setSearchQuery,
+} = tweetsSlice.actions;
 
 const getTweets = () => {
   return async (dispatch) => {
@@ -41,6 +53,6 @@ const getTweets = () => {
   };
 };
 
-export { getTweets };
+export { getTweets, setLocationFilter, setSearchQuery };
 
 export default tweetsSlice.reducer;
