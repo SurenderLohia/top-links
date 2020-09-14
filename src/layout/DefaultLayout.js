@@ -8,7 +8,7 @@ function DefaultLayout({ children }) {
   return (
     <div>
       <Nav />
-      <Hero name="Nazria" />
+      <Hero />
       <div className="container">{children}</div>
     </div>
   );

@@ -11,6 +11,7 @@ const initialState = {
   locationFilter: "",
   searchQuery: "",
   isAuthenticated: true,
+  isLoading: false,
 };
 
 const tweetsSlice = createSlice({
@@ -34,6 +35,10 @@ const tweetsSlice = createSlice({
       const { isAuthenticated } = action.payload;
       state.isAuthenticated = isAuthenticated;
     },
+    setIsLoading(state, action) {
+      const { isLoading } = action.payload;
+      state.isLoading = isLoading;
+    },
   },
 });
 
@@ -42,22 +47,26 @@ const {
   setLocationFilter,
   setSearchQuery,
   setIsAuthenticated,
+  setIsLoading,
 } = tweetsSlice.actions;
 
 const getTweets = () => {
   return async (dispatch) => {
     try {
       console.log("getTweets: ", api.getTweets);
+      dispatch(setIsLoading({ isLoading: true }));
       const response = await axios.get(api.getTweets, {
         withCredentials: true,
       });
 
+      dispatch(setIsLoading({ isLoading: false }));
       const { tweets, topUser } = response.data;
       console.log("comes here");
       dispatch(setTweetsData({ tweets, topUser }));
       dispatch(setIsAuthenticated({ isAuthenticated: true }));
       return response;
     } catch (err) {
+      dispatch(setIsLoading({ isLoading: false }));
       dispatch(setIsAuthenticated({ isAuthenticated: false }));
       if (err.response) {
         console.log(err.response.data);

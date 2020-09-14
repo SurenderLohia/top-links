@@ -14,6 +14,7 @@ const initialState = {
     location: "",
   },
   isAuthenticated: false,
+  isLoading: false,
 };
 
 const userSlice = createSlice({
@@ -48,25 +49,32 @@ const userSlice = createSlice({
       const { isAuthenticated } = action.payload;
       state.isAuthenticated = isAuthenticated;
     },
+    setIsLoading(state, action) {
+      const { isLoading } = action.payload;
+      state.isLoading = isLoading;
+    },
   },
 });
 
-const { setUserData } = userSlice.actions;
+const { setUserData, setIsLoading } = userSlice.actions;
 
 const getUserData = () => {
   return async (dispatch) => {
     try {
       console.log("getUser: ", api.getUser);
+      dispatch(setIsLoading({ isLoading: true }));
       const response = await axios.get(api.getUser, {
         withCredentials: true,
       });
 
+      dispatch(setIsLoading({ isLoading: false }));
       console.log(response);
       dispatch(
         setUserData({ userData: response.data.user, isAuthenticated: true })
       );
       return response;
     } catch (err) {
+      dispatch(setIsLoading({ isLoading: false }));
       if (err.response) {
         console.log(err.response.data);
       }

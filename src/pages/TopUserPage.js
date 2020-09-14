@@ -6,6 +6,7 @@ import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
 import UserCard from "../components/UserCard";
+import Loader from "../components/Loader";
 
 const mapDispatchToProps = {
   getUserData,
@@ -18,11 +19,12 @@ const mapStateToProps = (state) => {
     user: state.user.data,
     topUser: tweets.data.topUser,
     isAuthenticated: tweets.isAuthenticated,
+    isTweetsLoading: tweets.isLoading,
   };
 };
 
 function TopUserPage(props) {
-  const { getUserData, getTweets, isAuthenticated } = props;
+  const { getUserData, getTweets, isAuthenticated, isTweetsLoading } = props;
   const { topUser } = props;
   useEffect(() => {
     getUserData();
@@ -31,6 +33,10 @@ function TopUserPage(props) {
 
   if (!isAuthenticated) {
     return <Redirect to="/" />;
+  }
+
+  if (isTweetsLoading) {
+    return <Loader />;
   }
 
   return (

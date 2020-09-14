@@ -6,6 +6,7 @@ import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
 import VisibileTweets from "../features/tweets/VisibleTweets";
+import Loader from "../components/Loader";
 
 const mapDispatchToProps = {
   getUserData,
@@ -13,14 +14,16 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => {
+  const { user, tweets } = state;
   return {
-    user: state.user,
-    isAuthenticated: state.tweets.isAuthenticated,
+    user,
+    isAuthenticated: tweets.isAuthenticated,
+    isTweetsLoading: tweets.isLoading,
   };
 };
 
 function HomePage(props) {
-  const { getUserData, getTweets, isAuthenticated } = props;
+  const { getUserData, getTweets, isAuthenticated, isTweetsLoading } = props;
   useEffect(() => {
     getUserData();
     getTweets();
@@ -29,6 +32,11 @@ function HomePage(props) {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
+
+  if (isTweetsLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="container">
       <VisibileTweets />
