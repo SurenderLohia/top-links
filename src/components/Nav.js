@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import api from "../constants/api";
 
 function Nav(props) {
   const onLogout = () => {
     window.localStorage.setItem("isLoggedIn", "");
-    window.open("http://localhost:4000/auth/logout", "_self");
+    window.open(api.logout, "_self");
   };
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">

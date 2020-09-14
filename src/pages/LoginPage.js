@@ -1,11 +1,12 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
+import api from "../constants/api";
 import signInWithTwitterBtn from "../images/sign-in-with-twitter-btn.png";
 
 function LoginPage() {
   const onLogin = () => {
-    window.open("http://localhost:4000/auth/twitter", "_self");
+    window.open(api.login, "_self");
   };
   const isLoggedIn = window.localStorage.getItem("isLoggedIn");
   if (isLoggedIn) {
