@@ -13,6 +13,7 @@ const initialState = {
     access_token_secret: "",
     location: "",
   },
+  isAuthenticated: false,
 };
 
 const userSlice = createSlice({
@@ -20,6 +21,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData(state, action) {
+      const { isAuthenticated, userData } = action.payload;
       const {
         name,
         screenName,
@@ -28,7 +30,7 @@ const userSlice = createSlice({
         access_token_key,
         access_token_secret,
         location,
-      } = action.payload;
+      } = userData;
 
       state.data = {
         name,
@@ -39,6 +41,12 @@ const userSlice = createSlice({
         access_token_secret,
         location,
       };
+
+      state.isAuthenticated = isAuthenticated;
+    },
+    setIsAuthenticated(state, action) {
+      const { isAuthenticated } = action.payload;
+      state.isAuthenticated = isAuthenticated;
     },
   },
 });
@@ -54,7 +62,9 @@ const getUserData = () => {
       });
 
       console.log(response);
-      dispatch(setUserData(response.data.user));
+      dispatch(
+        setUserData({ userData: response.data.user, isAuthenticated: true })
+      );
       return response;
     } catch (err) {
       if (err.response) {

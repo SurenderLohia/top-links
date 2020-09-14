@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Nav() {
+function Nav(props) {
+  const onLogout = () => {
+    window.open("http://localhost:4000/auth/logout", "_self");
+  };
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-menu is-active">
@@ -18,7 +21,9 @@ function Nav() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-light">Log out</a>
+              <button className="button is-light" onClick={onLogout}>
+                Log out
+              </button>
             </div>
           </div>
         </div>

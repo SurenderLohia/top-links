@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
@@ -13,17 +14,21 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.data,
+    user: state.user,
+    isAuthenticated: state.tweets.isAuthenticated,
   };
 };
 
 function HomePage(props) {
-  const { getUserData, getTweets } = props;
-  const { name } = props.user;
+  const { getUserData, getTweets, isAuthenticated } = props;
   useEffect(() => {
     getUserData();
     getTweets();
   }, []);
+
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="container">
       <VisibileTweets />

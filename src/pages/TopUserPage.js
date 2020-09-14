@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
@@ -12,19 +13,25 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => {
+  const { tweets } = state;
   return {
     user: state.user.data,
-    topUser: state.tweets.data.topUser,
+    topUser: tweets.data.topUser,
+    isAuthenticated: tweets.isAuthenticated,
   };
 };
 
 function TopUserPage(props) {
-  const { getUserData, getTweets } = props;
+  const { getUserData, getTweets, isAuthenticated } = props;
   const { topUser } = props;
   useEffect(() => {
     getUserData();
     getTweets();
   }, []);
+
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="container">

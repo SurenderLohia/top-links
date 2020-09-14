@@ -10,6 +10,7 @@ const initialState = {
   },
   locationFilter: "",
   searchQuery: "",
+  isAuthenticated: true,
 };
 
 const tweetsSlice = createSlice({
@@ -29,6 +30,10 @@ const tweetsSlice = createSlice({
       const { searchQuery } = action.payload;
       state.searchQuery = searchQuery;
     },
+    setIsAuthenticated(state, action) {
+      const { isAuthenticated } = action.payload;
+      state.isAuthenticated = isAuthenticated;
+    },
   },
 });
 
@@ -36,6 +41,7 @@ const {
   setTweetsData,
   setLocationFilter,
   setSearchQuery,
+  setIsAuthenticated,
 } = tweetsSlice.actions;
 
 const getTweets = () => {
@@ -47,10 +53,12 @@ const getTweets = () => {
       });
 
       const { tweets, topUser } = response.data;
-
+      console.log("comes here");
       dispatch(setTweetsData({ tweets, topUser }));
+      dispatch(setIsAuthenticated({ isAuthenticated: true }));
       return response;
     } catch (err) {
+      dispatch(setIsAuthenticated({ isAuthenticated: false }));
       if (err.response) {
         console.log(err.response.data);
       }
@@ -59,6 +67,6 @@ const getTweets = () => {
   };
 };
 
-export { getTweets, setLocationFilter, setSearchQuery };
+export { getTweets, setLocationFilter, setSearchQuery, setIsAuthenticated };
 
 export default tweetsSlice.reducer;
