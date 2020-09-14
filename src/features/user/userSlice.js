@@ -72,9 +72,11 @@ const getUserData = () => {
       dispatch(
         setUserData({ userData: response.data.user, isAuthenticated: true })
       );
+      window.localStorage.setItem("isLoggedIn", "true");
       return response;
     } catch (err) {
       dispatch(setIsLoading({ isLoading: false }));
+      window.localStorage.setItem("isLoggedIn", "");
       if (err.response) {
         console.log(err.response.data);
       }

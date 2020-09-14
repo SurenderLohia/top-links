@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function Nav(props) {
   const onLogout = () => {
+    window.localStorage.setItem("isLoggedIn", "");
     window.open("http://localhost:4000/auth/logout", "_self");
   };
   return (
