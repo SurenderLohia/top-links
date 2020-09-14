@@ -5,6 +5,8 @@ import api from "../../constants/api";
 
 const initialState = {
   items: [],
+  locationFilter: "",
+  searchQuery: "",
 };
 
 const tweetsSlice = createSlice({

@@ -5,7 +5,7 @@ import { getUserData } from "../features/user/userSlice";
 import { getTweets } from "../features/tweets/tweetsSlice";
 
 import Nav from "../components/Nav";
-import Tweets from "../features/tweets/Tweets";
+import VisibileTweets from "../features/tweets/VisibleTweets";
 
 const mapDispatchToProps = {
   getUserData,
@@ -15,12 +15,11 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     user: state.user.data,
-    tweets: state.tweets.items,
   };
 };
 
 function HomePage(props) {
-  const { getUserData, getTweets, tweets } = props;
+  const { getUserData, getTweets } = props;
   const { name } = props.user;
   useEffect(() => {
     getUserData();
@@ -38,7 +37,7 @@ function HomePage(props) {
         </div>
       </section>
       <div className="container">
-        <Tweets tweets={tweets} />
+        <VisibileTweets />
       </div>
     </div>
   );

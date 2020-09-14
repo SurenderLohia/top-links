@@ -18,4 +18,8 @@ Tweets.propTypes = {
   tweets: PropTypes.array,
 };
 
+Tweets.defaultProps = {
+  tweets: [],
+};
+
 export default Tweets;
